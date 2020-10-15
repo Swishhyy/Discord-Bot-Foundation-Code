@@ -1,0 +1,39 @@
+const Discord = require("discord.js");
+const bot = new Discord.Client();
+
+const token = 'token';
+
+const PREFIX = '!';
+
+var version = '1.0.1';
+
+bot.on('ready', () =>{
+    console.log('The Bot Is Running!');
+})
+
+bot.on('message' , message=>{
+   
+    let args = message.content.substring(PREFIX.length).split(" ");
+
+    switch(args[0]){
+        case 'hi':
+            message.reply('Hey There!');
+            break;
+        case 'website':
+            message.channel.sendMessage('');
+            break;
+        case 'info': 
+            if(args[1] === 'version'){
+                message.channel.sendmessage('version ');
+            }else{
+                message.channel.sendmessage('invalid command')
+            }
+            break;
+        case 'clear':
+            if(!args[1]) return message.reply('Error Please Define Seccond arg')
+        message.channel.bulkDelete(args[1]);
+            break;
+    }
+})
+         
+bot.login(token);
